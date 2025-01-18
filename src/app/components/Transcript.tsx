@@ -48,7 +48,7 @@ function Transcript({
     setPrevLogs(transcriptItems);
   }, [transcriptItems]);
 
-  // Autofocus on text box input on load
+  // 起動時にテキストボックスにフォーカス
   useEffect(() => {
     if (canSend && inputRef.current) {
       inputRef.current.focus();
@@ -62,7 +62,7 @@ function Transcript({
       setJustCopied(true);
       setTimeout(() => setJustCopied(false), 1500);
     } catch (error) {
-      console.error("Failed to copy transcript:", error);
+      console.error("トランスクリプトのコピーに失敗しました:", error);
     }
   };
 
@@ -73,7 +73,7 @@ function Transcript({
           onClick={handleCopyTranscript}
           className={`absolute w-20 top-3 right-2 mr-1 z-10 text-sm px-3 py-2 rounded-full bg-gray-200 hover:bg-gray-300`}
         >
-          {justCopied ? "Copied!" : "Copy"}
+          {justCopied ? "コピー完了" : "コピー"}
         </button>
 
         <div
@@ -142,13 +142,13 @@ function Transcript({
                 </div>
               );
             } else {
-              // Fallback if type is neither MESSAGE nor BREADCRUMB
+              // MESSAGE、BREADCRUMB以外の場合のフォールバック
               return (
                 <div
                   key={itemId}
                   className="flex justify-center text-gray-500 text-sm italic font-mono"
                 >
-                  Unknown item type: {type}{" "}
+                  未知のアイテムタイプ: {type}{" "}
                   <span className="ml-2 text-xs">{timestamp}</span>
                 </div>
               );
@@ -169,14 +169,14 @@ function Transcript({
             }
           }}
           className="flex-1 px-4 py-2 focus:outline-none"
-          placeholder="Type a message..."
+          placeholder="メッセージを入力..."
         />
         <button
           onClick={onSendMessage}
           disabled={!canSend || !userText.trim()}
           className="bg-gray-900 text-white rounded-full px-2 py-2 disabled:opacity-50"
         >
-          <Image src="arrow.svg" alt="Send" width={24} height={24} />
+          <Image src="arrow.svg" alt="送信" width={24} height={24} />
         </button>
       </div>
     </div>
