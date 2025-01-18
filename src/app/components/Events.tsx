@@ -14,6 +14,8 @@ function Events({ isExpanded }: EventsProps) {
 
   const { loggedEvents, toggleExpand } = useEvent();
 
+  // ▲: クライアントからの送信
+  // ▼: サーバーからの応答
   const getDirectionArrow = (direction: string) => {
     if (direction === "client") return { symbol: "▲", color: "#7f5af0" };
     if (direction === "server") return { symbol: "▼", color: "#2cb67d" };
@@ -42,7 +44,10 @@ function Events({ isExpanded }: EventsProps) {
       {isExpanded && (
         <div>
           <div className="font-semibold px-6 py-4 sticky top-0 z-10 text-base border-b bg-white">
-            Logs
+            イベントログ
+            <div className="text-xs font-normal text-gray-500 mt-1">
+              ▲ クライアント送信 / ▼ サーバー応答
+            </div>
           </div>
           <div>
             {loggedEvents.map((log) => {
@@ -64,6 +69,7 @@ function Events({ isExpanded }: EventsProps) {
                       <span
                         style={{ color: arrowInfo.color }}
                         className="ml-1 mr-2"
+                        title={log.direction === "client" ? "クライアント送信" : "サーバー応答"}
                       >
                       {arrowInfo.symbol}
                       </span>

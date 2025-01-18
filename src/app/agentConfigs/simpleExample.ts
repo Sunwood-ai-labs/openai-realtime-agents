@@ -1,25 +1,25 @@
 import { AgentConfig } from "@/app/types";
 import { injectTransferTools } from "./utils";
 
-// Define agents
+// エージェントの定義
 const haiku: AgentConfig = {
   name: "haiku",
-  publicDescription: "Agent that writes haikus.", // Context for the agent_transfer tool
+  publicDescription: "俳句を作成するエージェント", // agent_transfer toolのコンテキスト
   instructions:
-    "Ask the user for a topic, then reply with a haiku about that topic.",
+    "ユーザーにテーマを尋ね、そのテーマに関する俳句を日本語で作成してください。返答は必ず日本語で行ってください。",
   tools: [],
 };
 
 const greeter: AgentConfig = {
   name: "greeter",
-  publicDescription: "Agent that greets the user.",
+  publicDescription: "ユーザーに挨拶をするエージェント",
   instructions:
-    "Please greet the user and ask them if they'd like a Haiku. If yes, transfer them to the 'haiku' agent.",
+    "ユーザーに日本語で挨拶し、俳句を聞きたいか尋ねてください。はいと答えた場合は'haiku'エージェントに転送してください。すべての返答は日本語で行ってください。",
   tools: [],
   downstreamAgents: [haiku],
 };
 
-// add the transfer tool to point to downstreamAgents
+// downstreamAgentsを指すtransfer toolを追加
 const agents = injectTransferTools([greeter, haiku]);
 
 export default agents;

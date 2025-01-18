@@ -32,9 +32,9 @@ function BottomToolbar({
   const isConnecting = sessionStatus === "CONNECTING";
 
   function getConnectionButtonLabel() {
-    if (isConnected) return "Disconnect";
-    if (isConnecting) return "Connecting...";
-    return "Connect";
+    if (isConnected) return "切断";
+    if (isConnecting) return "接続中...";
+    return "接続";
   }
 
   function getConnectionButtonClasses() {
@@ -42,10 +42,10 @@ function BottomToolbar({
     const cursorClass = isConnecting ? "cursor-not-allowed" : "cursor-pointer";
 
     if (isConnected) {
-      // Connected -> label "Disconnect" -> red
+      // Connected -> label "切断" -> red
       return `bg-red-600 hover:bg-red-700 ${cursorClass} ${baseClasses}`;
     }
-    // Disconnected or connecting -> label is either "Connect" or "Connecting" -> black
+    // Disconnected or connecting -> label is either "接続" or "接続中..." -> black
     return `bg-black hover:bg-gray-900 ${cursorClass} ${baseClasses}`;
   }
 
@@ -69,7 +69,7 @@ function BottomToolbar({
           className="w-4 h-4"
         />
         <label htmlFor="push-to-talk" className="flex items-center cursor-pointer">
-          Push to talk
+          プッシュトーク
         </label>
         <button
           onMouseDown={handleTalkButtonDown}
@@ -83,7 +83,7 @@ function BottomToolbar({
             (!isPTTActive ? " bg-gray-100 text-gray-400" : "")
           }
         >
-          Talk
+          話す
         </button>
       </div>
 
@@ -97,7 +97,7 @@ function BottomToolbar({
           className="w-4 h-4"
         />
         <label htmlFor="audio-playback" className="flex items-center cursor-pointer">
-          Audio playback
+          音声再生
         </label>
       </div>
 
@@ -110,7 +110,7 @@ function BottomToolbar({
           className="w-4 h-4"
         />
         <label htmlFor="logs" className="flex items-center cursor-pointer">
-          Logs
+          ログ表示
         </label>
       </div>
     </div>
